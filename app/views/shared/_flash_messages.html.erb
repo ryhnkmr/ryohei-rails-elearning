@@ -1,5 +1,5 @@
 <% if flash.any? %>
-    <% flash.each do |msg_type msg| %>
+    <% flash.each do |msg_type, msg| %>
         <div class="container p-2">
             <div class="alert alert-<%= msg_type %>">
                 <%= msg %>

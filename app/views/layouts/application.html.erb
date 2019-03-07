@@ -11,7 +11,7 @@
 
   <body>
     <%= render "shared/header" %>
-    <%= flash[:success] %>
+    <%= render "shared/flash_messages" %>
     <div class="container">
         <%= yield %>
     </div>
