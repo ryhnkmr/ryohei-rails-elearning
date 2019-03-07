@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_login, except: [:new, :create]
+
   def new 
     @user = User.new
   end
@@ -21,6 +23,13 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def require_login
+      unless logged_in?
+        flash[:danger] = "Unauthorized Access! Please login.."
+        redirect_to login_url
+      end
     end
 
 end
