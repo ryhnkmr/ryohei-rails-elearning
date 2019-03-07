@@ -1,0 +1,19 @@
+<h1 class="text-center border-bottom p-4 mb-3 ">Users</h1>
+<div class="row">
+    <% @users.each do |user| %>
+        <div class="col-lg-6">
+            <div class="media mb-3">
+                <div class="align-self-center mr-3 border ">
+                    <%= link_to gravatar_for(user), user_path(user) %>
+                </div>
+                <div class="media-body">
+                    <h4><%= link_to user.name%></h4>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+<div class="paginate text-center border-top pt-3">
+    <%= will_paginate %>
+</div>
