@@ -1,0 +1,21 @@
+<h1>Categories list</h1>
+ <%= link_to "create new category", new_admin_category_path %>
+<table border=1>
+    <tr>
+        <td>Title</td>
+        <td>Description</td>
+        <td>Action</td>
+    </tr>
+    <br />
+    <% @cats.each do |cat| %>
+        <tr>
+            <td><%= cat.title %></td>
+            <td><%= cat.description %></td>
+            <td>
+                <%= link_to "add"%>
+                <%= link_to "edit", edit_admin_category_path(cat.id) %>
+                <%= link_to "Delete", admin_category_path(cat.id),method: :delete %>
+            </td>
+        </tr>
+    <% end %>
+</table>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root'static_pages#home'
   get '/about', to: "static_pages#about"
   get '/login', to: "sessions#new"
@@ -8,4 +9,9 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions, only:[:create]
   resources :relationships, only:[:create, :destroy]
+
+  namespace :admin do
+    resources :categories
+  end
+
 end
