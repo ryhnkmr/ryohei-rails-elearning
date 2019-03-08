@@ -2,9 +2,9 @@
     <div class="col-lg-3">
       <h2>Dashboard</h2>
         <div class="media">
-            <%= gravatar_for (@user) %>
+            <%= gravatar_for (current_user) %>
             <div class="media-body">
-                <h5 class="mt-0"><%= @user.name %></h5>
+                <h5 class="mt-0"><%= current_user.name %></h5>
                 #showing the number of words user learned
              </div>
         </div>
