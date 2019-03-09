@@ -3,6 +3,9 @@ class AdminController < ApplicationController
 
   private
   def require_admin 
-    redirect_to root_url unless current_user.admin?
+     unless current_user.admin?
+      flash[:danger]  = "You don't have a permission"
+      redirect_to root_url
+     end
   end
 end
