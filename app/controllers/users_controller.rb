@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
     def require_login
       unless logged_in?
-        flash[:danger] = "Unauthorized Access! Please login.."
+        flash[:danger] = "Unauthorized Access! Please login..."
         redirect_to login_url
       end
     end

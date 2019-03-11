@@ -1,0 +1,19 @@
+<%= form_for([:admin, @category, @word]) do |f| %>
+    <div class="form-group">
+        <%= f.label :content %>
+        <%= f.text_field :content, class: "form-control",
+                                placeholder: "Enter the word" %>
+    </div>
+    
+    <%= f.fields_for :choices do |i| %>
+        <div class="form-group">
+            <%= i.label :content %>
+            <%= i.text_field :content, class: "form-control",
+                                        placeholder: "Enter the choice" %>
+            <%= i.check_box 'correct', {}, true, false %>
+        </div>
+    <% end %>
+
+    <%= f.submit btn_msg, class: "btn #{btn_type} btn-block" %>
+
+<% end %>
