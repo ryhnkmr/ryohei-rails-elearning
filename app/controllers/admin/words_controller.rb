@@ -1,9 +1,8 @@
 class Admin::WordsController < AdminController 
 
   def new
-    # @category = Category.find_by(id: params[:category_id])
     @category = Category.find(params[:category_id])
-    @word = @category.words.new
+    @word = @category.words.build
 
     3.times do
       @choices = @word.choices.build
@@ -24,14 +23,13 @@ class Admin::WordsController < AdminController
 
   def edit
     @category = Category.find(params[:category_id])
-    @word = Word.find(params[:id])
-    @choice = Choice.find(params[:id])
+    @word = @category.words.find(params[:id])
+    
   end
 
   def update
     @category = Category.find(params[:category_id])
     @word = Word.find(params[:id])
-    @choice = Choice.find(@word.id)
     
     if @word.update_attributes(word_params)
       
@@ -44,9 +42,7 @@ class Admin::WordsController < AdminController
 
   def index
     @category = Category.find(params[:category_id])
-    @word = @category.words.new
-    @choice = @word.choices.build
-    @words = Word.paginate(page: params[:page], per_page: 20)
+    @words = @category.words.paginate(page: params[:page], per_page: 20)
   end
 
   def destroy

@@ -1,4 +1,7 @@
 <%= form_for([:admin, @cat]) do |f| %>
+   
+    <%= render "shared/error_messages", object: f.object %>
+    
     <div class="form-group">
         <%= f.label :title %>
         <%= f.text_field :title, class: "form-control",

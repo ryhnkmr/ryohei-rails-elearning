@@ -11,7 +11,7 @@
             <td><%= word.content %></td>
             <td>
                 <%= link_to "add", new_admin_category_word_path  %>
-                <%= link_to "edit", edit_admin_category_word_path(@category, @category.id, @choice.id) %>
+                <%= link_to "edit", edit_admin_category_word_path(category_id: @category,id: word) %>
                 <%= link_to "Delete", admin_category_word_path(@category, word.id),method: :delete %>
             </td>
         </tr>
