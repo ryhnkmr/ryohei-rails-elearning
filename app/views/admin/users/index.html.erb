@@ -7,11 +7,18 @@
                     <%= link_to gravatar_for(user), user_path(user) %>
                 </div>
                 <div class="media-body">
-                    <h4><%= link_to user.name, user%></h4>
+                    <h4><%= link_to user.name, user %></h4>
                 </div>
-                <% if current_user == user.id %>
+
+                <% if current_user.admin? || current_user == user %>
                     <%= link_to "delete", user , method: :destroy,class: "btn btn-outline-danger float-right btn-sm ",
                                                                     data: {confirm: "Are you sure?" } %>
+                <% end %>
+                
+                <% if user.admin? %>
+                    <%= link_to "  remove from admin", admin_user_path(user),class: "btn btn-outline-danger float-right btn-sm " ,method: :delete %>
+                <% else %>
+                    <%= link_to "  set as admin",admin_user_path(user), class: "btn btn-outline-info float-right btn-sm ",method: :patch %>
                 <% end %>
             </div>
         </div>
