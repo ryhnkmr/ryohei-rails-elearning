@@ -11,9 +11,9 @@ module UsersHelper
   def admin(user)
     if current_user != user
       if user.admin? 
-          link_to "  remove as admin", admin_user_path(user),class: "btn btn-outline-danger float-right btn-sm " ,method: :delete 
+          link_to "remove as admin", admin_user_path(user),class: "btn btn-outline-danger float-right btn-sm " ,method: :delete 
       else 
-          link_to "  set as admin",admin_user_path(user), class: "btn btn-outline-info float-right btn-sm ",method: :patch 
+          link_to "set as admin",admin_user_path(user), class: "btn btn-outline-info float-right btn-sm ",method: :patch 
       end   
     end 
   end

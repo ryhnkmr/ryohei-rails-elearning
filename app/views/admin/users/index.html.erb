@@ -11,11 +11,7 @@
                 </div>
 
                 <% unless current_user == user%>
-                    <% if user.admin? %>
-                        <%= link_to "  remove from admin", admin_user_path(user),class: "btn btn-outline-danger float-right btn-sm " ,method: :delete %>
-                    <% else %>
-                        <%= link_to "  set as admin",admin_user_path(user), class: "btn btn-outline-info float-right btn-sm ",method: :patch %>
-                    <% end %>
+                    <%= admin(user) %>
                     
                     <% if current_user.admin? %>
                         <%= link_to "delete", user , method: :destroy,class: "btn btn-outline-danger float-right btn-sm ",
