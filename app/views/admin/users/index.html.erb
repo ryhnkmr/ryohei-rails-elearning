@@ -10,15 +10,17 @@
                     <h4><%= link_to user.name, user %></h4>
                 </div>
 
-                <% if current_user.admin? || current_user == user %>
-                    <%= link_to "delete", user , method: :destroy,class: "btn btn-outline-danger float-right btn-sm ",
+                <% unless current_user == user%>
+                    <% if user.admin? %>
+                        <%= link_to "  remove from admin", admin_user_path(user),class: "btn btn-outline-danger float-right btn-sm " ,method: :delete %>
+                    <% else %>
+                        <%= link_to "  set as admin",admin_user_path(user), class: "btn btn-outline-info float-right btn-sm ",method: :patch %>
+                    <% end %>
+                    
+                    <% if current_user.admin? %>
+                        <%= link_to "delete", user , method: :destroy,class: "btn btn-outline-danger float-right btn-sm ",
                                                                     data: {confirm: "Are you sure?" } %>
-                <% end %>
-                
-                <% if user.admin? %>
-                    <%= link_to "  remove from admin", admin_user_path(user),class: "btn btn-outline-danger float-right btn-sm " ,method: :delete %>
-                <% else %>
-                    <%= link_to "  set as admin",admin_user_path(user), class: "btn btn-outline-info float-right btn-sm ",method: :patch %>
+                    <% end %>
                 <% end %>
             </div>
         </div>
