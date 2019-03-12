@@ -1,0 +1,18 @@
+<h1>Quetions list</h1>
+ <%= link_to "add new word", new_admin_category_word_path %>
+<table border=1>
+    <tr>
+        <td>word</td>
+        <td>Action</td>
+    </tr>
+    <br />
+    <% @words.each do |word| %>
+        <tr>
+            <td><%= word.content %></td>
+            <td>
+                <%= link_to "edit", edit_admin_category_word_path(category_id: @category,id: word) %>
+                <%= link_to "Delete", admin_category_word_path(@category, word.id),method: :delete %>
+            </td>
+        </tr>
+    <% end %>
+</table>
