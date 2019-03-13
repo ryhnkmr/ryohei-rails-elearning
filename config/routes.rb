@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete '/logout', to: "sessions#destroy"
   get '/dashboard', to: "users#dashboard"
   patch '/admin/users/:id', to: "admin/users#update"
+  get '/categories', to: "categories#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users
   resources :sessions, only:[:create]
