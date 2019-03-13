@@ -5,9 +5,11 @@
         <div class="col-lg-6">
             <div class="card">
             <div class="card-body">
-                <h5 class="card-title"><%= cat.title %></h5>
-                <p class="card-text"><%= cat.description %></p>
-                <%= link_to "start" %>
+                <% if  cat.words.size != 0%>
+                    <h5 class="card-title"><%= cat.title %></h5>
+                    <p class="card-text"><%= cat.description %></p>
+                    <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user), method: :post %>
+                <% end %>
             </div>
             </div>
         </div>
