@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   resources :relationships, only:[:create,:destroy]
   
   resources :lessons , only:[:show, :create] do
-    resources :answers, only:[:new]
-    post '/answers', to: "answers#create"
+    resources :answers, only:[:new,:create]
+    # post '/answers', to: "answers#create"
   end
 
   namespace :admin do
