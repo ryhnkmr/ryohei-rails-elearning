@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-lg-3">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body text-center">
                 <%= gravatar_for current_user %>
                 <h3><%= @user.name %></h3>
-                <%= @user.email %>
+                    <%= @user.email %>
                     <div class="row">
                         <div class="col">
                             <h4><%= @user.following.count %></h4>
@@ -15,6 +15,7 @@
                             <small>folloers</small>
                         </div>
                     </div>
+                    
 
                 <% unless current_user == @user %>
                     <% if current_user.following?(@user) %>
@@ -23,6 +24,14 @@
                         <%= render "follow" %>
                     <% end %>
                 <% end %>
+
+                <div class="row">
+                    <div class="col">
+                        <%= link_to @user.answers.count, user_words_path(@user) %> <br />
+                        <h3>words learned</h3>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

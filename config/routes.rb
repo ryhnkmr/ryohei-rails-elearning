@@ -8,13 +8,15 @@ Rails.application.routes.draw do
   patch '/admin/users/:id', to: "admin/users#update"
   get '/categories', to: "categories#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :users
+  resources :users do
+    resources :words, only:[:index]
+  end
+
   resources :sessions, only:[:create]
   resources :relationships, only:[:create,:destroy]
   
   resources :lessons , only:[:show, :create] do
     resources :answers, only:[:new,:create]
-    # post '/answers', to: "answers#create"
   end
 
   namespace :admin do

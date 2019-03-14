@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-3">
-      <div class="card">
+        <div class="card">
             <div class="card-body text-center">
                 <%= gravatar_for current_user %>
                 <h3><%= @user.name %></h3>
@@ -22,16 +22,33 @@
                         <h3>words learned</h3>
                     </div>
                 </div>
-            </div>
-    </div>
 
-    <div class="col-lg-9">
-        <div class="card">
-                    <h1>Activities</h1>
-                    <hr />
-                    <h1>Show activity</h1>
-                </div>
             </div>
         </div>
     </div>
+
+        <div class="col-lg-9">
+            <table border=1>
+                <tr>
+                    <td>Word</td>
+                    <td>Correct Answer</td>
+                    <td>Your Choice</td>
+                    <td></td>
+                </tr>
+                <br />
+                <% @answers.each do |answer| %>
+                    <tr>
+                        <td><%= answer.word.content %></td> 
+                        <td><%=  answer.word.correct_answer.content %></td> 
+                        <td><%= answer.choice.content %></td>
+                        <% if answer.choice.correct == true %>
+                            <td><i class="fa fa-check"></i></td>
+                        <% else %>
+                            <td><i class="fa fa-times"></i></td>
+                        <% end %>
+                    </tr>
+                <% end %>
+            </table>
+        </div>
+    
 </div>

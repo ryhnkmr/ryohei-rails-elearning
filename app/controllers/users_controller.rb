@@ -39,6 +39,7 @@ class UsersController < ApplicationController
   end
 
   def dashboard 
+    @user = User.find(current_user.id)
   end
   private
     def user_params
