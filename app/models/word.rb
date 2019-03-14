@@ -3,7 +3,12 @@ class Word < ApplicationRecord
 
   has_many :choices,
             dependent: :destroy
+  has_many :answers
+  has_many :lessons ,through: :answers,
+            dependent: :destroy
   accepts_nested_attributes_for :choices
+  
+
 
   validates :content, presence: true
   validate :check_box

@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-lg-6 offset-3">
+        <h1><%= @cat.title %></h1>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4"><%= @word.content %></h1>
+                    <p class="lead ">
+                        <% @word.choices.each do |choice| %>
+                            <div class="m-2">                                           
+                                <%= form_for ([:lesson ,@lesson.answers.build]) do |f| %>
+                                    <%= f.hidden_field :choice_id, :value => choice.id %>
+                                    <%= f.hidden_field :word_id, :value => @word.id%>
+                                    <%= f.submit choice.content, class:"btn btn-primary btn-block" %>
+                                <% end %>
+                            </div>
+                        <% end %>               
+                    </p>
+                </div>
+            </div>
+    </div>
+</div>
