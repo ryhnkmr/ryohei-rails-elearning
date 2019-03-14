@@ -1,5 +1,5 @@
 <h1><%= @lesson.category.title %></h1>
- <h1>Result <%= @lesson.count_correct_answer %> of <%= count_words(@lesson.category.id) %></h1>
+ <h1>Result <%= @lesson.count_correct_answer %> of <%= @lesson.category.words.count %></h1>
 <table border=1>
     <tr>
         <td>Word</td>

@@ -8,8 +8,5 @@ class Category < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
 
-  def all_questions
-    words.count
-  end
 
 end
