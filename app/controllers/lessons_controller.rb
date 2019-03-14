@@ -8,6 +8,12 @@ class LessonsController < ApplicationController
     redirect_to new_lesson_answer_url(@lesson)
   end
 
+  def show
+    @lesson = Lesson.find(params[:id])
+    @answers = @lesson.answers
+
+  end
+
   private
     def lesson_params
       params.permit(:category_id,:user_id, :result)

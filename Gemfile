@@ -40,6 +40,7 @@ gem 'jquery-rails'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap4'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem 'font-awesome-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

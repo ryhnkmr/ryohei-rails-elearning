@@ -13,6 +13,12 @@ class Word < ApplicationRecord
   validates :content, presence: true
   validate :check_box
 
+  def correct_answer
+    choices.find_by(correct: true)
+  end
+
+  
+
   private
     def check_box
       choices_correct = choices.collect{|choice| choice.correct || nil }

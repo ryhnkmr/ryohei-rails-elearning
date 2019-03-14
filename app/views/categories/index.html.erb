@@ -8,11 +8,11 @@
                 <% if  cat.words.size != 0%>
                     <h5 class="card-title"><%= cat.title %></h5>
                     <p class="card-text"><%= cat.description %></p>
-                        <% if @lessons_category.include?(cat.id) %>
-                            <p>learned</p> 
-                        <% else %>
+                        <%# <% if @lessons_category.include?(cat.id) %> %>
+                            <%# <p>learned</p>  %>
+                        <%# <% else %> %>
                             <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user), method: :post %>
-                        <% end %>
+                        <%# <% end %> %>
                 <% end %>
             </div>
             </div>

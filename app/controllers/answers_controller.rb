@@ -8,8 +8,7 @@ class AnswersController < ApplicationController
     if (learning_word - learned_word).size != 0
       @word = (learning_word - learned_word).first
     else
-      abort
-      redirect_to "lesson result page"
+      redirect_to lesson_url(@lesson)
     end
     
   end
