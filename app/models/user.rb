@@ -24,8 +24,9 @@ class User < ApplicationRecord
   has_many :followers,  through: :passive_relationships,
                         source: :follower
 
-  has_many :categories, through: :lessons
   has_many :lessons
+  has_many :categories, through: :lessons
+  has_many :answers,through: :lessons
 
   def follow(other_user)
     following << other_user
