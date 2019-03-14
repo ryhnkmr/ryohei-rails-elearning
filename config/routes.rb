@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions, only:[:create]
   resources :relationships, only:[:create,:destroy]
+  
+  resources :lessons , only:[:show, :create] do
+    resources :answers, only:[:new]
+    post '/answers', to: "answers#create"
+  end
 
   namespace :admin do
     resources :users, only:[:index, :destroy]
