@@ -36,10 +36,13 @@ class UsersController < ApplicationController
 
   def show 
     @user = User.find(params[:id])
+    @activities = @user.activities
   end
 
   def dashboard 
     @user = User.find(current_user.id)
+    @activities = @user.activities.order("created_at DESC")
+    
   end
   private
     def user_params

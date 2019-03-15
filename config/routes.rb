@@ -13,9 +13,12 @@ Rails.application.routes.draw do
   end
 
   resources :sessions, only:[:create]
-  resources :relationships, only:[:create,:destroy]
+  resources :relationships, only:[:create,:destroy] do
+    resources :activities, only:[:create]
+  end
   
   resources :lessons , only:[:show, :create] do
+    resources :activities, only:[:crete]
     resources :answers, only:[:new,:create]
   end
 
