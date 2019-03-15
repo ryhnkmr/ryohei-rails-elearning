@@ -23,14 +23,24 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 
     <div class="col-lg-9">
         <div class="card">
-                    <h1>Activities</h1>
-                    <hr />
-                    <h1>Show activity</h1>
-                </div>
+            <div class="card-header">
+                <h1>Activities</h1>
+            </div>
+            <div class="card-body">
+                <% @activities.each do |activity| %>
+                    <p><%= link_to "You", user_path(@user) %> followed <%= link_to activity.action.followed.name,user_path(activity.action.followed.id) %></p>
+                    <small class="text-muted">
+                        <%= time_ago_in_words activity.created_at %> ago
+                    </small>
+                <% end %>
+            </div>
+            <div class="card-footer">
+                 <h3 class="text-muted">pagination</h3>
             </div>
         </div>
     </div>
