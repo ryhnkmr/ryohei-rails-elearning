@@ -33,14 +33,28 @@
             </div>
             <div class="card-body">
                 <% @activities.each do |activity| %>
-                    <% if activity.action_type == "Relationship"%>
-                            <p><%= link_to activity.user.name , user_path(@user) %> followed <%= link_to activity.action.followed.name,user_path(activity.action.followed.id) %></p>
-                    <% else %>
-                        <p><%= link_to activity.user.name ,user_path(@user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.category.words.count %> words in <%= link_to activity.action.category.title,categories_path %> </p>
-                    <% end %>
-                    <small class="text-muted">
-                        <%= time_ago_in_words activity.created_at %> ago
-                    </small>
+                    <div class="media m-4">
+                        <%=link_to gravatar_for (activity.user) %>
+                        <div class="media-body ml-5">
+                        
+                        <% if activity.action_type == "Relationship"%>
+                            <% if current_user.id == activity.user_id %>
+                                <p><%= link_to "You" , user_path(current_user) %> followed <%= link_to activity.action.followed.name,user_path(activity.action.followed.id) %></p>
+                            <% else %>
+                                <p><%= link_to activity.user.name , user_path(@user) %> followed <%= link_to activity.action.followed.name,user_path(activity.action.followed.id) %></p>
+                            <% end %>
+                        <% else %>
+                            <% if current_user.id == activity.user_id %>
+                                <p><%= link_to "You" ,user_path(current_user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.category.words.count %> words in <%= link_to activity.action.category.title,categories_path %> </p>
+                            <% else %>
+                                <p><%= link_to activity.user.name ,user_path(@user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.category.words.count %> words in <%= link_to activity.action.category.title,categories_path %> </p>
+                            <% end %>
+                        <% end %>
+                        <small class="text-muted">
+                            <%= time_ago_in_words activity.created_at %> ago
+                        </small>
+                        </div>
+                    </div>
                 <% end %>
             </div>
             <div class="card-footer">
