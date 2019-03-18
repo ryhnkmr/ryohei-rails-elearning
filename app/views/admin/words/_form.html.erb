@@ -1,22 +1,30 @@
-<%= form_for([:admin, @category, @word]) do |f| %>
+<div class="col-lg-6 offset-3">
+    <%= form_for([:admin, @category, @word]) do |f| %>
+        
+        <%= render "shared/error_messages", object: f.object %>
     
-    <%= render "shared/error_messages", object: f.object %>
-
-    <div class="form-group">
-        <%= f.label :content %>
-        <%= f.text_field :content, class: "form-control",
-                                placeholder: "Enter the word" %>
-    </div>
-    
-    <%= f.fields_for :choices do |i| %>
-        <div class="form-group">
-            <%= i.label :content %>
-            <%= i.text_field :content, class: "form-control",
-                                        placeholder: "Enter the choice" %>
-            <%= i.check_box 'correct', {}, true, false %>
+            <div class="form-group">
+                <%= f.label :content, "Word" %>
+                <%= f.text_field :content, class: "form-control",
+                                        placeholder: "Enter the word" %>
+            </div>
+            
+        <div class="row">
+            <%= f.fields_for :choices do |i| %>
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <%= i.label :content, "choices" %>
+                        <%= i.text_field :content, class:"form-control",
+                                                    placeholder: "Enter the choice" %>
+                    <div class="col-lg-4">
+                         <small>correct</small>
+                        <%= i.check_box 'correct', {}, true, false %>
+                    </div>
+                    </div>
+                </div>
+            <% end %>
         </div>
+
+            <%= f.submit btn_msg, class: "btn #{btn_type} btn-block" %>
     <% end %>
-
-    <%= f.submit btn_msg, class: "btn #{btn_type} btn-block" %>
-
-<% end %>
+</div>

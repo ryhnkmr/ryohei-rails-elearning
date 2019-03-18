@@ -2,7 +2,52 @@
 @import "font-awesome";
 
 .paginate{
-    nav{
-        display: inline-block;
-    }
+  nav{
+    display: inline-block;
+  }
+}
+
+
+html,body {height:100%;}
+
+.image {
+  width: 100%;
+  position: relative;
+  height: auto !important;
+  height: 100%;
+  min-height: 100%;
+  background-image: image-url("books-education-indoors-159675.jpg");
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+
+nav {
+  font-family: 'Vidaloka', serif;
+}
+
+
+footer{
+  width: 100%;
+  color:white;
+  position: absolute;
+  bottom: 0; 
+  padding-bottom: 10px
+
+}
+
+h1,p {
+  color: white;
+}
+.main {
+  padding-bottom: 10%;
+}
+
+.paginate {
+  padding-left: 40%;
+}
+
+.font-size {
+  font-size: 200%;
+  margin-right: 10%;
+  color: aliceblue;
 }

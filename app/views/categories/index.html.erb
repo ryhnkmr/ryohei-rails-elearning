@@ -1,21 +1,21 @@
-<h1>Categories list</h1>
+<h1 class="textwhite">Categories list</h1>
 
-<% @cats.each do |cat| %>
-    <div class="row">
+<div class="row">
+    <% @cats.each do |cat| %>
         <div class="col-lg-6">
             <div class="card">
-            <div class="card-body">
-                <% if  cat.words.size != 0%>
-                    <h5 class="card-title"><%= cat.title %></h5>
-                    <p class="card-text"><%= cat.description %></p>
-                        <% if @lessons_category.include?(cat.id) %>
-                            <p>learned</p> 
-                        <% else %>
-                            <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user), method: :post %>
-                        <% end %>
-                <% end %>
-            </div>
+                <div class="card-body">
+                    <% if  cat.words.size != 0%>
+                        <h5 class="card-title"><%= cat.title %></h5>
+                        <p class="card-text"><%= cat.description %></p>
+                            <% if @lessons_category.include?(cat.id) %>
+                                <p>learned</p> 
+                            <% else %>
+                                <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user), method: :post %>
+                            <% end %>
+                    <% end %>
+                </div>
             </div>
         </div>
-    </div>
-<% end %>
+    <% end %>
+</div>
