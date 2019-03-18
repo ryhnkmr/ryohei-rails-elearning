@@ -13,10 +13,10 @@
                 <td><%= word.content %></td>
                 <td>
                     <%= link_to  edit_admin_category_word_path(category_id: @category, id: word) do %>
-                        <i class="fa fa-edit"></i>
+                        <span class="font-size "><i class="fa fa-edit"></i></span>
                     <% end %>
                     <%= link_to  admin_category_word_path(@category, word.id),method: :delete do %>
-                        <i class="fa fa-trash"></i>    
+                        <span class="font-size "><i class="fa fa-trash"></i></span>    
                     <% end %>
                 </td>
             </tr>
