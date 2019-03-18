@@ -41,7 +41,11 @@ class UsersController < ApplicationController
 
   def dashboard 
     @user = User.find(current_user.id)
-    @activities = @user.activities.order("created_at DESC")
+    following_users = @user.following
+    following_activities = following_users.collect{|a| a.activities }
+    current_user_activities = following_activities.push(@user.activities)
+    @activities = current_user_activities.flatten!.reverse
+    # @activities = activities.sort{}
     
   end
   private

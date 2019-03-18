@@ -4,6 +4,8 @@ class LessonsController < ApplicationController
     @category = Category.find(params[:category_id])
     @lesson = @category.lessons.build(lesson_params)
     @lesson.save
+    
+    @lesson.create_activity(user_id: @lesson.user_id)
 
     redirect_to new_lesson_answer_url(@lesson)
   end
@@ -11,7 +13,6 @@ class LessonsController < ApplicationController
   def show
     @lesson = Lesson.find(params[:id])
     @answers = @lesson.answers
-
   end
 
   private

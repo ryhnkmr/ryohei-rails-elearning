@@ -9,7 +9,7 @@
                             <div class="m-2">                                           
                                 <%= form_for ([:lesson ,@lesson.answers.build]) do |f| %>
                                     <%= f.hidden_field :choice_id, :value => choice.id %>
-                                    <%= f.hidden_field :word_id, :value => @word.id%>
+                                    <%= f.hidden_field :word_id, :value => @word.id %>
                                     <%= f.submit choice.content, class:"btn btn-primary btn-block" %>
                                 <% end %>
                             </div>
