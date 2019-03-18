@@ -1,18 +1,25 @@
-<h1>Quetions list</h1>
- <%= link_to "add new word", new_admin_category_word_path %>
-<table border=1>
-    <tr>
-        <td>word</td>
-        <td>Action</td>
-    </tr>
-    <br />
-    <% @words.each do |word| %>
-        <tr>
-            <td><%= word.content %></td>
-            <td>
-                <%= link_to "edit", edit_admin_category_word_path(category_id: @category,id: word) %>
-                <%= link_to "Delete", admin_category_word_path(@category, word.id),method: :delete %>
-            </td>
+<h1 class="text-center">Quetions list</h1>
+ <%= link_to "add new word", new_admin_category_word_path, class: 'btn btn-outline-success float-right mb-3'%>
+<table class="table">
+    <t-head>
+        <tr class="text-white">
+            <td>word</td>
+            <td>Action</td>
         </tr>
-    <% end %>
+    </t-head>
+    <t-body>
+        <% @words.each do |word| %>
+            <tr class="text-white">
+                <td><%= word.content %></td>
+                <td>
+                    <%= link_to  edit_admin_category_word_path(category_id: @category, id: word) do %>
+                        <i class="fa fa-edit"></i>
+                    <% end %>
+                    <%= link_to  admin_category_word_path(@category, word.id),method: :delete do %>
+                        <i class="fa fa-trash"></i>    
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+    </t-body>
 </table>

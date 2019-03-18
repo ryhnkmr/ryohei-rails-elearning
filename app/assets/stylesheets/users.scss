@@ -1,3 +1,34 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.text-center {
+  padding-top:0%;
+}
+
+label {
+  font-size: 100%;
+}
+
+.col-lg-6 {
+  background-color: rgba(230, 225, 225, 0.418);
+  padding: 1% 3% ;
+  position: relative;
+
+}
+
+.row {
+  padding-bottom: 9%;
+}
+
+p {
+  color: white;
+}
+
+.signup-head h1 {
+  font-size: 300%;
+}
+
+.paginate {
+  padding-left: 40%;
+}
+
+.head h1 {
+  font-size: 300%;
+}

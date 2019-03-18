@@ -14,15 +14,16 @@
                     <%= admin(user) %>
                     
                     <% if current_user.admin? %>
-                        <%= link_to "delete", user , method: :destroy,class: "btn btn-outline-danger float-right btn-sm ",
+                        <%= link_to "delete", user , method: :destroy,class: "btn btn-outline-danger float-right btn-sm ml-2",
                                                                     data: {confirm: "Are you sure?" } %>
                     <% end %>
                 <% end %>
             </div>
         </div>
     <% end %>
+    <div class="paginate border-top pt-3 ">
+        <%= will_paginate %>
+    </div>
 </div>
 
-<div class="paginate text-center border-top pt-3">
-    <%= will_paginate %>
-</div>
+

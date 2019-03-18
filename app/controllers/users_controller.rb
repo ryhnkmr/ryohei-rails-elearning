@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
+  require 'will_paginate/array'
 
   def new 
     @user = User.new
@@ -44,9 +45,8 @@ class UsersController < ApplicationController
     following_users = @user.following
     following_activities = following_users.collect{|a| a.activities }
     current_user_activities = following_activities.push(@user.activities)
-    @activities = current_user_activities.flatten!.reverse
-    # @activities = activities.sort{}
-    
+    activities = current_user_activities.flatten!.reverse    
+    @activities = activities.paginate(page: params[:page], per_page: 7)
   end
   private
     def user_params

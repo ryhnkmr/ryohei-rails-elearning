@@ -1,23 +1,26 @@
 <h1><%= @lesson.category.title %></h1>
  <h1>Result <%= @lesson.count_correct_answer %> of <%= @lesson.category.words.count %></h1>
-<table border=1>
-    <tr>
-        <td>Word</td>
-        <td>Correct Answer</td>
-        <td>Your Choice</td>
-        <td></td>
-    </tr>
-    <br />
-    <% @answers.each do |answer| %>
+<table class="table">
+    <t-head>
         <tr>
-            <td><%= answer.word.content %></td> 
-            <td><%=  answer.word.correct_answer.content %></td> 
-            <td><%= answer.choice.content %></td>
-            <% if answer.choice.correct == true %>
-                <td><i class="fa fa-check"></i></td>
-            <% else %>
-                <td><i class="fa fa-times"></i></td>
-            <% end %>
+            <td>Word</td>
+            <td>Correct Answer</td>
+            <td>Your Choice</td>
+            <td></td>
         </tr>
+    </t-head>
+    <% @answers.each do |answer| %>
+        <t-body>
+            <tr>
+                <td><%= answer.word.content %></td> 
+                <td><%=  answer.word.correct_answer.content %></td> 
+                <td><%= answer.choice.content %></td>
+                <% if answer.choice.correct == true %>
+                    <td><i class="fa fa-check"></i></td>
+                <% else %>
+                    <td><i class="fa fa-times"></i></td>
+                <% end %>
+            </tr>
+        </t-body>
     <% end %>
 </table>

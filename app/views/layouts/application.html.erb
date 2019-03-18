@@ -6,15 +6,24 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'static_pages', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'users', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'sessions', media: 'all', 'data-turbolinks-track': 'reload' %>
+     <%= stylesheet_link_tag    'categories', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Poiret+One|Vidaloka" rel="stylesheet">
   </head>
 
   <body>
-    <%= render "shared/header" %>
-    <%= render "shared/flash_messages" %>
-    <div class="container mt-3">
-        <%= yield %>
+    <div class="image">
+        <div class="container">
+            <%= render "shared/header" %>
+            <%= render "shared/flash_messages" %>
+            <div class="main">
+                <%= yield %>
+            </div>
+        </div>
+        <%= render "shared/footer" %>
     </div>
-    <%= render "shared/footer" %>
-  </body>
+  </body> 
 </html>

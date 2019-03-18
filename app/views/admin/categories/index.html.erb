@@ -1,21 +1,31 @@
-<h1>Categories list</h1>
- <%= link_to "create new category", new_admin_category_path%>
-<table border=1>
-    <tr>
-        <td>Title</td>
-        <td>Description</td>
-        <td>Action</td>
-    </tr>
-    <br />
-    <% @cats.each do |cat| %>
-        <tr>
-            <td><%= link_to cat.title, admin_category_words_path(cat.id) %></td>
-            <td><%= cat.description %></td>
-            <td>
-                <%= link_to "add", new_admin_category_word_path(cat.id) %>
-                <%= link_to "edit", edit_admin_category_path(cat.id) %>
-                <%= link_to "Delete", admin_category_path(cat.id),method: :delete %>
-            </td>
+<h1 class="text-center">Categories list</h1>
+ <%= link_to "create new category", new_admin_category_path, class:"btn btn-success float-right mb-3"%>
+<table class="table">
+    <thead>
+        <tr class="text-white">
+            <td class="text-white">Title</td>
+            <td class="text-white">Description</td>
+            <td class="text-white">Action</td>
         </tr>
+    </thead>
+    
+    <% @cats.each do |cat| %>
+        <t-body>
+            <tr>
+                <td class="text-white"><%= link_to cat.title, admin_category_words_path(cat.id) %></td>
+                <td class="text-white"><%= cat.description %></td>
+                <td>
+                    <%= link_to  new_admin_category_word_path(cat.id) do %>
+                        <i class="fa fa-plus-square"></i>
+                    <% end %>
+                    <%= link_to  edit_admin_category_path(cat.id) do  %>
+                        <i class="fa fa-edit"></i>
+                    <% end %>
+                    <%= link_to  admin_category_path(cat.id), method: :delete do %>
+                        <i class="fa fa-trash"></i>                   
+                    <% end %>
+                </td>
+            </tr>
+        </t-body>
     <% end %>
 </table>
