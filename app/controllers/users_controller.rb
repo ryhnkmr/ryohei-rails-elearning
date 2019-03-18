@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 10)
+    @users = User.paginate(page: params[:page], per_page: 10).search(params[:search])
   end
 
   def edit
@@ -48,9 +48,10 @@ class UsersController < ApplicationController
     activities = current_user_activities.flatten!.reverse    
     @activities = activities.paginate(page: params[:page], per_page: 7)
   end
+
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :search)
     end
 
     def require_login
