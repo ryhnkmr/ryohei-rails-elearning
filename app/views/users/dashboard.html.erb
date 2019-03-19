@@ -2,7 +2,11 @@
     <div class="col-lg-3">
       <div class="card">
             <div class="card-body text-center mt-5 mb-3">
-                <%= gravatar_for current_user %>
+                <% if current_user.image? %>
+                    <%= image_tag @user.image.url,:size => "80x80"%>
+                <% else %>
+                    <%= link_to gravatar_for(activity.user), user_path(activity.user) %>
+                <% end %>
                 <h3><%= @user.name %></h3>
                     <%= @user.email %>
                     <div class="row">
@@ -36,7 +40,11 @@
             <div class="card-body">
                 <% @activities.each do |activity| %>
                     <div class="media m-4">
-                        <%=link_to gravatar_for (activity.user) %>
+                        <% if activity.user.image? %>
+                            <%= image_tag activity.user.image.url,:size => "80x80" %>
+                        <% else %>
+                            <%= link_to gravatar_for(activity.user), user_path(activity.user) %>
+                        <% end %>
                         <div class="media-body ml-5">
                         
                         <% if activity.action_type == "Relationship"%>

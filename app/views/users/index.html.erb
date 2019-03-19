@@ -5,7 +5,11 @@
             <div class="col-lg-6">
                 <div class="media ">
                     <div class="align-self-center mr-3 border ">
-                        <%= link_to gravatar_for(user), user_path(user) %>
+                        <% if user.image? %>
+                            <%= image_tag user.image.url,:size => "80x80"%>
+                        <% else %>
+                            <%= link_to gravatar_for(user), user_path(user) %>
+                        <% end %>
                     </div>
                     <div class="media-body">
                         <h4><%= link_to user.name, user%></h4>
