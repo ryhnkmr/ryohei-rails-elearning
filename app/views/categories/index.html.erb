@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-lg-12">
         <ul class="nav nav-pills">
-            <% if @status == "all"%>
+            <% if @status == "all" || @status == nil %>
                 <li class="nav-item">
                     <%= link_to "All",categories_path(status: "all"), class:"nav-link active"%>
                 </li>

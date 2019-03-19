@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-3">
         <div class="card">
-            <div class="card-body text-center">
+            <div class="card-body text-center mt-4">
                 <% if @user.image? %>
                     <%= image_tag @user.image.url,:size => "80x80"%>
                 <% else %>
@@ -48,18 +48,30 @@
             </div>
             <div class="card-body">
                 <% @activities.each do |activity| %>
-                    <% if activity.action_type == "Relationship" %>
-                        <p><%= link_to activity.user.name, user_path(@user) %> followed <%= link_to activity.action.followed.name,user_path(activity.action.followed.id) %></p>
-                    <% else %>
-                        <p><%= link_to activity.user.name ,user_path(@user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.category.words.count %> words in <%= link_to activity.action.category.title,categories_path %> </p>
-                    <% end %>
-                    <small class="text-muted">
-                        <%= time_ago_in_words activity.created_at %> ago
-                    </small>
+                    <div class="media mt-3 mb-3 ml-3">
+                           <% if @user.image? %>
+                                <%= image_tag activity.user.image.url,:size => "80x80"%>
+                            <% else %>
+                                <%= link_to gravatar_for(activity.user), user_path(activity.user) %>
+                            <% end %>
+                        <div class="media-body ml-5">
+                            <% if activity.action_type == "Relationship" %>
+                                <p><%= link_to activity.user.name, user_path(@user) %> followed <%= link_to activity.action.followed.name,user_path(activity.action.followed.id) %></p>
+                            <% else %>
+                                <p><%= link_to activity.user.name ,user_path(@user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.category.words.count %> words in <%= link_to activity.action.category.title,categories_path %> </p>
+                            <% end %>
+                            <small class="text-muted">
+                                <%= time_ago_in_words activity.created_at %> ago
+                            </small>
+                        </div>
+                    </div>
                 <% end %>
+            
             </div>
             <div class="card-footer">
-                 <h3 class="text-muted">pagination</h3>
+                <div class="paginate border-top pt-3 ">
+                    <%= will_paginate @activities %>
+                </div>
             </div>
         </div>
     </div>
