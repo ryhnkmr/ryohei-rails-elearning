@@ -20,6 +20,9 @@
         <%= f.password_field :password_confirmation, class: "form-control ",
                                 placeholder: "Re-Enter your password"%>
     </div>
-
+    <div class="form-group text-white">
+        <%= f.label :image %>
+        <%= f.file_field :image %>
+    </div>
     <%= f.submit btn_msg, class:"btn #{btn_type} btn-block mt-5 mb-3"%>
 <% end %>
