@@ -3,10 +3,10 @@ class CategoriesController < ApplicationController
     @lessons = Lesson.where(user_id: current_user.id)
     @lessons_category = @lessons.collect{|n| n.category_id}
     @status = params[:status]
-
+abort
     all_cats = Category.all
     learned_cats = @lessons.collect{|n| n.category}
-
+    
     # abort
     if @status == "all"
       @cats = all_cats.paginate(page: params[:page], per_page: 6)

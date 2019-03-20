@@ -4,7 +4,6 @@ class WordsController < ApplicationController
     lesson = @user.lessons
     @cats = lesson.collect{|n| n.category}
     @title = params[:title]
-
     if @title == "all" || @title == nil
       @answers = @user.answers
     else

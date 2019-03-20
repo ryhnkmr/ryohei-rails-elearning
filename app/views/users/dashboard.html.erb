@@ -55,9 +55,9 @@
                             <% end %>
                         <% else %>
                             <% if current_user.id == activity.user_id %>
-                                <p><%= link_to "You" ,user_path(current_user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.category.words.count %> words in <%= link_to activity.action.category.title,categories_path %> </p>
+                                <p><%= link_to "You" ,user_path(current_user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.category.words.count %> words in <%= link_to activity.action.category.title,user_words_path(current_user.id,status: activity.action.category.id) %> </p>
                             <% else %>
-                                <p><%= link_to activity.user.name ,user_path(@user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.category.words.count %> words in <%= link_to activity.action.category.title,categories_path %> </p>
+                                <p><%= link_to activity.user.name ,user_path(@user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.category.words.count %> words in <%= link_to activity.action.category.title,user_words_path(@user.id, status:activity.action.category.id) %> </p>
                             <% end %>
                         <% end %>
                         <small class="text-muted">

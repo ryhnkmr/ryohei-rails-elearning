@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :activities, only:[:create]
   end
   
-  resources :lessons , only:[:show, :create] do
+  resources :lessons , only:[:show, :create, :update] do
     resources :activities, only:[:crete]
     resources :answers, only:[:new,:create]
   end

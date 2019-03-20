@@ -15,6 +15,17 @@ class LessonsController < ApplicationController
     @answers = @lesson.answers
   end
 
+  def update
+    @category = Category.find(params[:category_id])
+    @lesson = @category.lessons(user_params)
+    @lesson.update
+
+    
+    @lesson.create_activity(user_id: @lesson.user_id)
+
+    redirect_to new_lesson_answer_url(@lesson)
+  end
+
   private
     def lesson_params
       params.permit(:category_id,:user_id, :result)

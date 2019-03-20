@@ -47,10 +47,18 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= cat.title %></h5>
                             <p class="card-text"><%= cat.description %></p>
-                                <% if @lessons_category.include?(cat.id) %>
-                                    <p>learned</p> 
+                            <%# <%abort %> %>
+                                <%# <% if @lessons_category.include?(cat.id)%> 
+                                <% unless Lesson.where(category_id:cat.id).where(user_id: current_user.id).first == nil %>
+                                    <% if cat.words.size == Lesson.where(category_id:cat.id,user_id: current_user.id).first.answers.size %>
+                                        <%= link_to "Show result", user_words_path(current_user.id) %>
+                                    <% else %>
+                                        <% if Lesson.find_by(category_id:cat.id,user_id: current_user.id) %>
+                                            <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user.id), method: :post %>
+                                        <% end %>
+                                    <% end %>
                                 <% else %>
-                                    <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user), method: :post %>
+                                    <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user.id), method: :post %>
                                 <% end %>
                         </div>
                     </div>
