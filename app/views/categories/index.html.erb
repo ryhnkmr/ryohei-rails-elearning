@@ -40,6 +40,7 @@
     </div>
 </div>
 <div class="row">
+    <% if @cats != nil %>
         <% unless @cats.size == 0 %>
             <% @cats.each do |cat| %>
                 <div class="col-lg-6">
@@ -47,23 +48,20 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= cat.title %></h5>
                             <p class="card-text"><%= cat.description %></p>
-                            <%# <%abort %> %>
-                                <%# <% if @lessons_category.include?(cat.id)%> 
-                                <% unless @complete_lessons != nil %>
-                                    <%# <% if cat.words.size == Lesson.where(category_id:cat.id,user_id: current_user.id).first.answers.size %> %>
-                                    <% if cat.words.size == @complete_lessons.select{|n| n.category_id == cat.id}.answers.first.size %>
-                                    
-                                        <%= link_to "Show result", user_words_path(current_user.id) %>
-                                    <% else %>
-                                        <%# <% if Lesson.find_by(category_id:cat.id,user_id: current_user.id) %> %>
-                                        <%# <%abort%> %>
-                                            <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user.id), method: :post %>
-                                        <%# <% end %> %>
-                                    <% end %>
+                                <% if cat.words.size == 0 %>
+                                    <p>coming soon</p>
                                 <% else %>
-                                    <%# <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user.id), method: :post %> %>
-                                    <%= link_to "Show result", user_words_path(current_user.id) %>
-                                <% end %>
+                                    <% if @complete_lessons.collect{|n| n.category_id}.flatten.include?(cat.id) %>
+                                        <% if cat.words.size == @complete_lessons.select{|n| n.category_id == cat.id}.first.answers.size %>
+                                            <%= link_to "Show result", user_words_path(current_user.id) %>
+                                        <% else %>
+                                            <%abort%>
+                                            <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user.id), method: :post %>
+                                        <% end %>
+                                    <% else %>
+                                        <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user.id), method: :post %>
+                                    <% end %>
+                                <% end %>  
                         </div>
                     </div>
                 </div>
@@ -71,17 +69,11 @@
         <% else %>
             <h1>nothing matches</h1>
         <% end %>   
+    <% end %>
+</div>
+
+<% if @cats != nil%>
+    <div class="paginate">
+        <%= will_paginate @cats %>
     </div>
-</div>
-
-
-<div class="paginate">
-    <%= will_paginate @cats %>
-</div>
-
- 
-
-
-  
-    
-  
+<% end %>

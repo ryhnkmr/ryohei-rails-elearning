@@ -19,7 +19,7 @@ module UsersHelper
   end
 
   def count_learned_words
-    @user = User.find(params[:user_id])
+    @user = User.find(user)
     lesson = @user.lessons
 
     duplicate_category = lesson.group(:category_id).having('count(*) >= 2').pluck(:category_id)
@@ -30,5 +30,6 @@ module UsersHelper
     @complete_lessons = (@non_duplicate_lesson << @duplicate_lessons).first
 
     @learned_words = @complete_lessons.collect{|n| n.answers}.size
+    abort
   end
 end
