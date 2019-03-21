@@ -9,8 +9,8 @@ class WordsController < ApplicationController
     @duplicate_les = Lesson.where(category_id: duplicate_category,user_id: @user.id)
     dup_les = @duplicate_les.group_by{|n| n.category_id}
     @duplicate_lessons = dup_les.collect{|n| n.last.last}
-    @non_duplicate_lesson = lesson.reject{|n| duplicate_category.include?(n.category_id)}
-    @complete_lessons = (@non_duplicate_lesson << @duplicate_lessons).first
+    @non_duplicate_lesson = lesson.reject{|n| duplicate_category.include?(n.category_id)}.flatten
+    @complete_lessons = (@non_duplicate_lesson << @duplicate_lessons).flatten
 
     @cats = @duplicate_lessons.collect{|n| n.category}
     
