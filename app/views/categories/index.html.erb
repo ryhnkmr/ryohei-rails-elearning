@@ -49,16 +49,20 @@
                             <p class="card-text"><%= cat.description %></p>
                             <%# <%abort %> %>
                                 <%# <% if @lessons_category.include?(cat.id)%> 
-                                <% unless Lesson.where(category_id:cat.id).where(user_id: current_user.id).first == nil %>
-                                    <% if cat.words.size == Lesson.where(category_id:cat.id,user_id: current_user.id).first.answers.size %>
+                                <% unless @complete_lessons != nil %>
+                                    <%# <% if cat.words.size == Lesson.where(category_id:cat.id,user_id: current_user.id).first.answers.size %> %>
+                                    <% if cat.words.size == @complete_lessons.select{|n| n.category_id == cat.id}.answers.first.size %>
+                                    
                                         <%= link_to "Show result", user_words_path(current_user.id) %>
                                     <% else %>
-                                        <% if Lesson.find_by(category_id:cat.id,user_id: current_user.id) %>
+                                        <%# <% if Lesson.find_by(category_id:cat.id,user_id: current_user.id) %> %>
+                                        <%# <%abort%> %>
                                             <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user.id), method: :post %>
-                                        <% end %>
+                                        <%# <% end %> %>
                                     <% end %>
                                 <% else %>
-                                    <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user.id), method: :post %>
+                                    <%# <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user.id), method: :post %> %>
+                                    <%= link_to "Show result", user_words_path(current_user.id) %>
                                 <% end %>
                         </div>
                     </div>
