@@ -40,6 +40,7 @@
     </div>
 </div>
 <div class="row">
+    <% if @cats != nil %>
         <% unless @cats.size == 0 %>
             <% @cats.each do |cat| %>
                 <div class="col-lg-6">
@@ -47,11 +48,19 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= cat.title %></h5>
                             <p class="card-text"><%= cat.description %></p>
-                                <% if @lessons_category.include?(cat.id) %>
-                                    <p>learned</p> 
+                                <% if cat.words.size == 0 %>
+                                    <p>coming soon</p>
                                 <% else %>
-                                    <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user), method: :post %>
-                                <% end %>
+                                    <% if @complete_lessons.collect{|n| n.category_id}.flatten.include?(cat.id) %>
+                                        <% if cat.words.size == @complete_lessons.select{|n| n.category_id == cat.id}.first.answers.size %>
+                                            <%= link_to "Show result", user_words_path(current_user.id) %>
+                                        <% else %>
+                                            <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user.id), method: :post %>
+                                        <% end %>
+                                    <% else %>
+                                        <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user.id), method: :post %>
+                                    <% end %>
+                                <% end %>  
                         </div>
                     </div>
                 </div>
@@ -59,17 +68,11 @@
         <% else %>
             <h1>nothing matches</h1>
         <% end %>   
+    <% end %>
+</div>
+
+<% if @cats != nil%>
+    <div class="paginate">
+        <%= will_paginate @cats %>
     </div>
-</div>
-
-
-<div class="paginate">
-    <%= will_paginate @cats %>
-</div>
-
- 
-
-
-  
-    
-  
+<% end %>

@@ -3,7 +3,8 @@ require "faker"
 User.create(
     name: "test user",
     email: "test@gmail.com",
-    password: "password"
+    password: "password",
+    admin: true
 )
 
 50.times do |n|

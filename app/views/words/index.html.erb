@@ -5,7 +5,7 @@
                 <% if @user.image? %>
                     <%= image_tag @user.image.url,:size => "80x80"%>
                 <% else %>
-                    <%= link_to gravatar_for(@user), user_path(@user) %>
+                    <img src="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="default image">
                 <% end %>
                 <h3><%= @user.name %></h3>
                     <%= @user.email %>
@@ -22,7 +22,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <h4 class="mb-0"><%= link_to @user.answers.count, user_words_path(@user)%></h4>
+                        <h4 class="mb-0"><%= link_to count_learned_words(@user), user_words_path(@user)%></h4>
                         <h3>words learned</h3>
                     </div>
                 </div>

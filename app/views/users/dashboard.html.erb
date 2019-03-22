@@ -5,7 +5,7 @@
                 <% if current_user.image? %>
                     <%= image_tag @user.image.url,:size => "80x80"%>
                 <% else %>
-                    <%= link_to gravatar_for(activity.user), user_path(activity.user) %>
+                    <img src="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="default image">
                 <% end %>
                 <h3><%= @user.name %></h3>
                     <%= @user.email %>
@@ -22,7 +22,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <h4 class="mb-0"><%= link_to @user.answers.count, user_words_path(@user) %></h4>
+                        <h4 class="mb-0"><%= link_to count_learned_words(@user), user_words_path(@user) %></h4>
                         <h3>words learned</h3>
                     </div>
                 </div>
@@ -39,32 +39,42 @@
             </div>
             <div class="card-body">
                 <% @activities.each do |activity| %>
-                    <div class="media m-4">
-                        <% if activity.user.image? %>
-                            <%= image_tag activity.user.image.url,:size => "80x80" %>
-                        <% else %>
-                            <%= link_to gravatar_for(activity.user), user_path(activity.user) %>
-                        <% end %>
-                        <div class="media-body ml-5">
+                    <% if activity.action != nil%>
+                        <div class="media m-4">
+                            <% if activity.user.image? %>
+                                <%= image_tag activity.user.image.url,:size => "80x80" %>
+                            <% else %>
+                                <img src="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="default image">                                           <% end %>
+                            <div class="media-body ml-5">
+                            
+                            <% if activity.action_type == "Relationship"%>
+                                <% if current_user.id == activity.user_id %>
+                                    <p><%= link_to "You" , user_path(current_user) %> followed <%= link_to activity.action.followed.name,user_path(activity.action.followed.id) %></p>
+                                <% else %>
+                                    <p><%= link_to activity.user.name , user_path(@user) %> followed <%= link_to activity.action.followed.name,user_path(activity.action.followed.id) %></p>
+                                <% end %>
+                            <% else %>
+                                <% if current_user.id == activity.user_id %>
+                                    <% if duplicate_lesson(current_user).include?(activity.action) && latest_duplicate_lesson(current_user) == activity.action %>
+                                        <p><%= link_to "You" ,user_path(current_user) %> learned <%= activity.action.count_correct_answer %> of <%=   activity.action.answers.count %> words in <%= link_to activity.action.category.title,user_words_path(current_user.id,title: activity.action.category.id) %> </p>
+                                    <% else %>
+                                        <p><%= link_to "You" ,user_path(current_user) %> learned <%= activity.action.count_correct_answer %> of <%=   activity.action.answers.count %> words in <%= link_to activity.action.category.title,user_words_path(current_user.id,previous: activity.action) %> </p>
+                                    <% end %>
+                                <% else %>
+                                    <% if duplicate_lesson(activity.user).inclide?(activity.action) && latest_duplicate_lesson(activity.user) == activity.action %>
+                                        <p><%= link_to activity.user.name ,user_path(@user) %> learned <%= activity.action.count_correct_answer %> of <%=   activity.action.answers.count %> words in <%= link_to activity.action.category.title,user_words_path(@user.id, title:activity.action.category.id) %> </p>
+                                    <% else %>
+                                        <p><%= link_to activity.user.name ,user_path(@user) %> learned <%= activity.action.count_correct_answer %> of <%=   activity.action.answers.count %> words in <%= link_to activity.action.category.title,user_words_path(@user.id, previous:activity.action) %> </p>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
                         
-                        <% if activity.action_type == "Relationship"%>
-                            <% if current_user.id == activity.user_id %>
-                                <p><%= link_to "You" , user_path(current_user) %> followed <%= link_to activity.action.followed.name,user_path(activity.action.followed.id) %></p>
-                            <% else %>
-                                <p><%= link_to activity.user.name , user_path(@user) %> followed <%= link_to activity.action.followed.name,user_path(activity.action.followed.id) %></p>
-                            <% end %>
-                        <% else %>
-                            <% if current_user.id == activity.user_id %>
-                                <p><%= link_to "You" ,user_path(current_user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.category.words.count %> words in <%= link_to activity.action.category.title,categories_path %> </p>
-                            <% else %>
-                                <p><%= link_to activity.user.name ,user_path(@user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.category.words.count %> words in <%= link_to activity.action.category.title,categories_path %> </p>
-                            <% end %>
-                        <% end %>
-                        <small class="text-muted">
-                            <%= time_ago_in_words activity.created_at %> ago
-                        </small>
+                            <small class="text-muted">
+                                <%= time_ago_in_words activity.created_at %> ago
+                            </small>
+                            </div>
                         </div>
-                    </div>
+                    <% end %>
                 <% end %>
             </div>
             <div class="card-footer paginate">

@@ -13,7 +13,4 @@ class Lesson < ApplicationRecord
     choices.where(correct: true).count
   end
 
-  def lesson_action
-
-  end
 end
