@@ -48,23 +48,25 @@
             </div>
             <div class="card-body">
                 <% @activities.each do |activity| %>
-                    <div class="media mt-3 mb-3 ml-3">
-                           <% if @user.image? %>
-                                <%= image_tag activity.user.image.url,:size => "80x80"%>
-                            <% else %>
-                               <img src="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="default image">
-                            <% end %>
-                        <div class="media-body ml-5">
-                            <% if activity.action_type == "Relationship" %>
-                                <p><%= link_to activity.user.name, user_path(@user) %> followed <%= link_to activity.action.followed.name,user_path(activity.action.followed.id) %></p>
-                            <% else %>
-                                <p><%= link_to activity.user.name ,user_path(@user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.answers.count %> words in <%= link_to activity.action.category.title,user_words_path(@user.id, title: activity.action.category.id) %> </p>
-                            <% end %>
-                            <small class="text-muted">
-                                <%= time_ago_in_words activity.created_at %> ago
-                            </small>
+                    <% if activity.action != nil%>
+                        <div class="media mt-3 mb-3 ml-3">
+                            <% if @user.image? %>
+                                    <%= image_tag activity.user.image.url,:size => "80x80"%>
+                                <% else %>
+                                <img src="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="default image">
+                                <% end %>
+                            <div class="media-body ml-5">
+                                <% if activity.action_type == "Relationship" %>
+                                    <p><%= link_to activity.user.name, user_path(@user) %> followed <%= link_to activity.action.followed.name,user_path(activity.action.followed.id) %></p>
+                                <% else %>
+                                    <p><%= link_to activity.user.name ,user_path(@user) %> learned <%= activity.action.count_correct_answer %> of <%= activity.action.answers.count %> words in <%= link_to activity.action.category.title,user_words_path(@user.id, title: activity.action.category.id) %> </p>
+                                <% end %>
+                                <small class="text-muted">
+                                    <%= time_ago_in_words activity.created_at %> ago
+                                </small>
+                            </div>
                         </div>
-                    </div>
+                    <% end %>
                 <% end %>
             
             </div>
