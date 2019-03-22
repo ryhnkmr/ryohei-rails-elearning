@@ -12,7 +12,6 @@ class CategoriesController < ApplicationController
     @non_duplicate_lesson = lesson.reject{|n| duplicate_category.include?(n.category_id)}.flatten
     @complete_lessons = (@non_duplicate_lesson << @duplicate_lessons).flatten
     
-# abort
     @all_cats = Category.all
     
     if @all_cats.size != 0    

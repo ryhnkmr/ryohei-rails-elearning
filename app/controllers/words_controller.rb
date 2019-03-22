@@ -20,12 +20,9 @@ class WordsController < ApplicationController
     else
       if @title == "all" || @title == nil
         @answers = @complete_lessons.collect{|n| n.answers}.flatten.paginate(page: params[:page], per_page: 10)
-        # abort
       else
         lesson = @complete_lessons.select{|n| n.category_id == @title.to_i}
         @answers = lesson.collect{|n| n.answers}.flatten.paginate(page: params[:page], per_page: 10)
-        
-        # abort
       end
     end
   end
