@@ -30,6 +30,23 @@ module UsersHelper
     @complete_lessons = (@non_duplicate_lesson << @duplicate_lessons).first
 
     @learned_words = @complete_lessons.collect{|n| n.answers}.size
-    abort
+  end
+
+  def duplicate_lesson(user)
+    lesson = user.lessons
+
+    duplicate_category = lesson.group(:category_id).having('count(*) >= 2').pluck(:category_id)
+    @duplicate_les = Lesson.where(category_id: duplicate_category,user_id: user.id)
+    dup_les = @duplicate_les.group_by{|n| n.category_id}
+    @duplicate_lessons = dup_les.collect{|n| n.last.last}
+  end
+
+  def latest_duplicate_lesson(user)
+    lesson = user.lessons
+
+    duplicate_category = lesson.group(:category_id).having('count(*) >= 2').pluck(:category_id)
+    @duplicate_les = Lesson.where(category_id: duplicate_category,user_id: user.id)
+    dup_les = @duplicate_les.group_by{|n| n.category_id}
+    @duplicate_lessons = dup_les.collect{|n| n.last.last}
   end
 end
