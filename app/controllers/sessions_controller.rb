@@ -20,4 +20,24 @@ class SessionsController < ApplicationController
     flash[:info] = "Successfully logged out!"
     redirect_to root_url
   end
+
+  def facebook_login
+    @user = User.from_omniauth(request.env["omniauth.auth"])
+       
+    result = @user.save(context: :facebook_login)
+
+    if result
+      login @user
+      redirect_to @user
+    else
+      abort
+      redirect_to auth_failure_url
+    end
+  end
+
+  def auth_failure
+    @user = User.new
+    flash[:danger] = "You failed facebook login"
+    render 'new'
+  end
 end

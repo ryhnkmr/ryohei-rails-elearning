@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_19_060116) do
+ActiveRecord::Schema.define(version: 2019_03_26_061038) do
 
   create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "action_id"
@@ -69,7 +69,9 @@ ActiveRecord::Schema.define(version: 2019_03_19_060116) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "picture"
+    t.string "uid"
+    t.string "oauth_token"
+    t.string "oauth_expires_at"
   end
 
   create_table "words", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

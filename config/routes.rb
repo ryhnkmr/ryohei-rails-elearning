@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'auth/:provider/callback', to: 'sessions#facebook_login',  as: :auth_callback
+  get 'auth/failure', to: "sessions#auth_failure", as: :auth_failure
+  # match 'signout', to: 'session#destroy', as: 'signout'
 
   root'static_pages#home'
   get '/about', to: "static_pages#about"
