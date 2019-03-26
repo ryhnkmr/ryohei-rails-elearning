@@ -34,13 +34,13 @@
         <div class="col-lg-9">
             <table class="table">
             <div class="dropdown show">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= link_to "a",href:"#", class:"btn btn-secondary dropdown-toggle", role:"button", id:"dropdownMenuLink", data:{toggle:"dropdown"}, aria:{haspopup:"true", expanded:"false"} do%>
                     <% if @title != "all" %>
-                        <%= @dropdown_menu.first.title%>
+                        <%= @dropdown_menu.first.title %>
                     <% else %>
                         All
                     <% end %>
-                </a>
+                <% end %>
                 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <%= link_to "all", user_words_path(current_user,title: "all"),class:"dropdown-item"%>
