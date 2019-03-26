@@ -53,7 +53,7 @@
                                 <% else %>
                                     <% if @complete_lessons.collect{|n| n.category_id}.flatten.include?(cat.id) %>
                                         <% if cat.words.size == @complete_lessons.select{|n| n.category_id == cat.id}.first.answers.size %>
-                                            <%= link_to "Show result", user_words_path(current_user.id) %>
+                                            <%= link_to "Show result", user_words_path(current_user.id,title: cat.id) %>
                                         <% else %>
                                             <%= link_to "start",lessons_path(category_id: cat.id, user_id: current_user.id), method: :post %>
                                         <% end %>
