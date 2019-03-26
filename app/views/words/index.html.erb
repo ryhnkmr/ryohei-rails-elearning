@@ -34,8 +34,8 @@
         <div class="col-lg-9">
             <table class="table">
             <div class="dropdown show">
-                <%= link_to "a",href:"#", class:"btn btn-secondary dropdown-toggle", role:"button", id:"dropdownMenuLink", data:{toggle:"dropdown"}, aria:{haspopup:"true", expanded:"false"} do%>
-                    <% if @title != "all" %>
+                <%= link_to "",href:"#", class:"btn btn-secondary dropdown-toggle", role:"button", id:"dropdownMenuLink", data:{toggle:"dropdown"}, aria:{haspopup:"true", expanded:"false"} do%>
+                    <% if @title != "all" && @dropdown_menu.size != 0%>
                         <%= @dropdown_menu.first.title %>
                     <% else %>
                         All
