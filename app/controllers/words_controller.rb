@@ -14,6 +14,7 @@ class WordsController < ApplicationController
     @complete_lessons = (@non_duplicate_lesson << @duplicate_lessons).flatten
 
     @cats = @complete_lessons.collect{|n| n.category}.flatten
+    @dropdown_menu = @cats.select{|n| n.id == @title.to_i} 
     
     if @previous_lesson != nil
       @answers = Answer.where(lesson_id: @previous_lesson.to_i)
