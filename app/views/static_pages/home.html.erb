@@ -3,7 +3,13 @@
         <div class="text-center container">
             <h1 class="text-white mb-0">Let's learn lots of words!</h1>
             <h1 class="text-white">Extend your world!</h1>
-            <%= link_to "get started", new_user_path, class:"btn btn-success mt-3 mb-3 btn-lg"%>
+            <%= link_to "Create new account", new_user_path, class:"btn btn-success mt-3 mb-3 btn-lg"%>
+            <h3 class="text-white"> Or <br/> start with your facebook account</h3>
+
+            <%= link_to  "/auth/facebook",class: "text-dark btn btn-primary text-white" do  %>
+                        <i class="fa fa-facebook text-white"></i><span class="text-white ml-3">Sign in with facebook</span>
+            <% end %>
+
         </div>
     </div>
 </div>
