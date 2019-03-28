@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :reset_token
+  attr_accessor :reset_token,:remember_token
   mount_uploader :image, PictureUploader
 
   validates :name, presence: true,
@@ -80,11 +80,11 @@ class User < ApplicationRecord
     update_attribute(:reset_sent_at, Time.zone.now)
   end
 
-  def User.new_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
-  def User.digest(string)
+  def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : 
     BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
@@ -99,4 +99,14 @@ class User < ApplicationRecord
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
+
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
+  end
+
+  def forget
+    update_attribute(:remember_digest,nil)
+  end
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_26_094110) do
+ActiveRecord::Schema.define(version: 2019_03_28_061724) do
 
   create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "action_id"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_094110) do
     t.string "uid"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.string "remember_digest"
   end
 
   create_table "words", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

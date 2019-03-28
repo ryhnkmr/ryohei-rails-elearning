@@ -4,10 +4,13 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:session][:email])
-
+    # abort
     if user && user.authenticate(params[:session][:password])
       login(user)
+      # abort
+      params[:session][:remember_me] == '1' ?  remember(user) : forget(user)
       flash[:success] = "Successfully logged in"
+      # abort
       redirect_to dashboard_url
     else
       flash[:danger] = "Invalid Credentials"
@@ -16,9 +19,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout
-    flash[:info] = "Successfully logged out!"
-    redirect_to root_url
+    if logged_in?
+      logout 
+      flash[:info] = "Successfully logged out!"
+      redirect_to root_url
+    end
   end
 
   def facebook_login
