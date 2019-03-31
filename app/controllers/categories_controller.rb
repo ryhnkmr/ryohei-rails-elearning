@@ -13,10 +13,12 @@ class CategoriesController < ApplicationController
     @complete_lessons = (@non_duplicate_lesson << @duplicate_lessons).flatten
     
     @all_cats = Category.all
-    
-    if @all_cats.size != 0    
+    # abort
+    if @all_cats.size != 0   
+
       if @lessons.size != 0
         learned_cats = @complete_lessons.collect{|n| n.category}
+        
         if @status == "unlearned"
           @cats = (@all_cats - learned_cats).paginate(page: params[:page], per_page: 6)
         elsif @status == "learned"
@@ -24,9 +26,19 @@ class CategoriesController < ApplicationController
         else
           @cats = @all_cats.paginate(page: params[:page], per_page: 6)
         end
+
       else
-        @cats = @all_cats.paginate(page: params[:page], per_page: 6)
+
+        if @status == "unlearned"
+          @cats = @all_cats.paginate(page: params[:page], per_page: 6)
+        elsif @status == "learned"
+          @cats = learned_cats
+        else
+          @cats = @all_cats.paginate(page: params[:page], per_page: 6)
+        end
+
       end
+
     end 
   end
 end
